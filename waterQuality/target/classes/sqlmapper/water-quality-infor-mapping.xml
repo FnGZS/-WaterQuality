@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crazyBird.dao.water.WaterQualityInformationDao">
+	<resultMap id="WaterInformationDTOMap"
+		type="com.crazyBird.dao.water.dataobject.WaterInformationDTO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="param" property="param"
+			jdbcType="INTEGER" />
+		<result column="param_value" property="paramValue"
+			jdbcType="NUMERIC" />
+		<result column="alarm_max" property="alarmMax"
+			jdbcType="NUMERIC" />
+		<result column="alarm_min" property="alarmMin"
+			jdbcType="NUMERIC" />
+		<result column="chinese" property="chinese"
+			jdbcType="VARCHAR" />
+		<result column="curve_points" property="curvePoints"
+			jdbcType="INTEGER" />
+		<result column="english" property="english"
+			jdbcType="VARCHAR" />
+		<result column="scope_max" property="scopeMax"
+			jdbcType="NUMERIC" />
+		<result column="scope_min" property="scopeMin"
+			jdbcType="NUMERIC" />
+		<result column="admin_id" property="adminId"
+			jdbcType="INTEGER" />
+		<result column="area" property="area"
+			jdbcType="INTEGER" />
+		<result column="location" property="location"
+			jdbcType="VARCHAR" />
+		<result column="use" property="use"
+			jdbcType="VARCHAR" />	
+		<result column="name" property="name"
+			jdbcType="VARCHAR" />	
+		<result column="unit" property="unit"
+			jdbcType="VARCHAR" />	
+		<result column="gmt_create" property="gmtCreate"
+			jdbcType="TIMESTAMP" />	
+	</resultMap>
+	<select id = "getWaterInformation" parameterType= "com.crazyBird.dao.water.dataobject.WaterQualityInforDO" resultMap = "WaterInformationDTOMap">
+	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.`name`
+	FROM water_quality_param as wqp 
+	LEFT JOIN water_param as wp on wp.id=wqp.param_id  
+	LEFT JOIN water_quality_infor as wqi on wqi.param_id=wp.id     
+	LEFT JOIN water_information as wi on wi.id = wqi.waters_id
+	LEFT JOIN admin as ad on ad.id = wi.admin_id
+	where wqi.waters_id = #{watersId,jdbcType=INTEGER} and wqi.param_id=#{paramId,jdbcType=INTEGER}  ORDER BY wqi.gmt_create desc limit 1
+	</select>
+	<select id = "getWatersParamInformation" parameterType= "com.crazyBird.dao.water.dataobject.WaterQualityInforDO" resultMap = "WaterInformationDTOMap">
+	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.`name`
+	FROM water_quality_param as wqp 
+	LEFT JOIN water_param as wp on wp.id=wqp.param_id  
+	LEFT JOIN water_quality_infor as wqi on wqi.param_id=wp.id     
+	LEFT JOIN water_information as wi on wi.id = wqi.waters_id
+	LEFT JOIN admin as ad on ad.id = wi.admin_id
+	where wqi.waters_id = #{watersId,jdbcType=INTEGER} and wqi.param_id=#{paramId,jdbcType=INTEGER}  ORDER BY wqi.gmt_create desc limit 10
+	</select>
+	<insert id = "insertWaterInformation" parameterType = "ArrayList"> 
+	insert into water_quality_infor 
+	(
+		param_id,
+		param_value,
+		gmt_create,
+		waters_id
+	)
+	values
+	<foreach collection="list" item="item" index="index" separator="," >
+	    (
+	    	#{item.paramId,jdbcType=INTEGER},
+	    	#{item.paramValue,jdbcType=NUMERIC},
+	    	NOW(),
+	    	#{item.watersId,jdbcType=INTEGER}
+		)  
+	</foreach>
+	
+	</insert>
+</mapper>
