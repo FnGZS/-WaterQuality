@@ -1,12 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>crazyBird</groupId>
-	<artifactId>crazyBird</artifactId>
+	<groupId>waterQuality</groupId>
+	<artifactId>waterQuality</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<name>crazyBird</name>
+	<name>waterQuality</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -246,6 +246,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>crazyBird</finalName>
+		<finalName>waterQuality</finalName>
 	</build>
 </project>

@@ -1,16 +1,14 @@
 package com.crazyBird.controller.user.param;
 
+public class UserWaterParam {
 
-public class UserLoginParam {
-
-	private String loginAccount;
 	private Long userId;
 	private String password;
-	public String getLoginAccount() {
-		return loginAccount;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setLoginAccount(String loginAccount) {
-		this.loginAccount = loginAccount;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	public String getPassword() {
 		return password;
@@ -18,6 +16,6 @@ public class UserLoginParam {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	
 }
