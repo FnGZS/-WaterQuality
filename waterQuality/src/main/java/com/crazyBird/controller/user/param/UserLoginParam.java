@@ -4,6 +4,7 @@ package com.crazyBird.controller.user.param;
 public class UserLoginParam {
 
 	private String loginAccount;
+	private Long userId;
 	private String password;
 	public String getLoginAccount() {
 		return loginAccount;

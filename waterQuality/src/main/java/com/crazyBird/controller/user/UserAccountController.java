@@ -24,7 +24,7 @@ import com.mysql.fabric.xmlrpc.base.Array;
  *
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/userAccout")
 public class UserAccountController {
 	@Autowired
 	private UserAccountProcess userAccountProcess;
