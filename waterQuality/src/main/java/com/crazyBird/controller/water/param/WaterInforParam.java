@@ -15,5 +15,4 @@ public class WaterInforParam {
 	}
 	private Integer watersId;
 	private Integer pasramId;
-	
 }

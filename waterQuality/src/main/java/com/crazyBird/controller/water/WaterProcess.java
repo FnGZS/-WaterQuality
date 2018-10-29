@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.crazyBird.controller.base.SimpleFlagModel;
 import com.crazyBird.controller.water.model.WaterInformationListItem;
@@ -16,15 +17,25 @@ import com.crazyBird.controller.water.model.WaterInformationModel;
 import com.crazyBird.controller.water.model.WaterParamItem;
 import com.crazyBird.controller.water.model.WaterParamListItem;
 import com.crazyBird.controller.water.model.WaterParamListModel;
+import com.crazyBird.controller.water.model.WaterParamModel;
+import com.crazyBird.controller.water.model.WaterParamSimpleItem;
+import com.crazyBird.controller.water.model.WaterQualityParamModel;
 import com.crazyBird.controller.water.param.WaterInforParam;
 import com.crazyBird.controller.water.param.WaterInformationCreateParam;
 import com.crazyBird.controller.water.param.WaterInformationItem;
+import com.crazyBird.controller.water.param.WaterInformationParam;
+import com.crazyBird.controller.water.param.WaterQualityAddParam;
 import com.crazyBird.dao.water.dataobject.WaterInforInsertDO;
+import com.crazyBird.dao.water.dataobject.WaterInformationDO;
 import com.crazyBird.dao.water.dataobject.WaterInformationDTO;
+import com.crazyBird.dao.water.dataobject.WaterParamDO;
 import com.crazyBird.dao.water.dataobject.WaterQualityInforDO;
+import com.crazyBird.dao.water.dataobject.WaterQuanlityParamDO;
 import com.crazyBird.model.enums.HttpCodeEnum;
 import com.crazyBird.service.water.WaterService;
 import com.crazyBird.utils.DateUtil;
+
+import net.sf.jasperreports.components.barbecue.BarcodeProviders.SSCC18Provider;
 
 @Component
 public class WaterProcess {
@@ -85,7 +96,7 @@ public class WaterProcess {
 		WaterParamListItem paramList = new WaterParamListItem();
 		paramList.setItems(list);
 		
-		return null;
+		return paramList;
 	}
 	public WaterParamListModel getWaterInformationByWaters(Integer id) {
 		WaterParamListModel model= new WaterParamListModel();
@@ -125,7 +136,44 @@ public class WaterProcess {
 		}	
 		model.setListItems(waterList);
 		return model;
-		
+	}
+	public SimpleFlagModel updateWaterParam(WaterQualityAddParam param) {
+	 	SimpleFlagModel model = new SimpleFlagModel();
+			WaterParamDO paramDO = new WaterParamDO();
+			WaterQuanlityParamDO quanlityParamDO = new WaterQuanlityParamDO();
+			quanlityParamDO.setAlarmMax(param.getAlarmMax());
+			quanlityParamDO.setAlarmMin(param.getAlarmMin());
+			quanlityParamDO.setChinese(param.getChinese());
+			quanlityParamDO.setCurvePoints(param.getCurvePoints());
+			quanlityParamDO.setEnglish(param.getEnglish());
+			quanlityParamDO.setParamId(param.getParamId());
+			quanlityParamDO.setScopeMax(param.getScopeMax());
+			quanlityParamDO.setScopeMin(param.getScopeMin());
+			quanlityParamDO.setUnit(param.getUnit());
+			quanlityParamDO.setId(param.getId());
+			waterService.updateWaterQualityParam(quanlityParamDO);
+			return model;
+	}
+    public SimpleFlagModel addWaterParam(WaterQualityAddParam param) {
+    	SimpleFlagModel model = new SimpleFlagModel();
+		WaterParamDO paramDO = new WaterParamDO();
+		WaterQuanlityParamDO quanlityParamDO = new WaterQuanlityParamDO();
+		quanlityParamDO.setAlarmMax(param.getAlarmMax());
+		quanlityParamDO.setAlarmMin(param.getAlarmMin());
+
+		quanlityParamDO.setChinese(param.getChinese());
+		quanlityParamDO.setCurvePoints(param.getCurvePoints());
+		quanlityParamDO.setEnglish(param.getEnglish());
+		quanlityParamDO.setParamId(param.getParamId());
+		quanlityParamDO.setId(param.getParamId());
+		quanlityParamDO.setScopeMax(param.getScopeMax());
+		quanlityParamDO.setScopeMin(param.getScopeMin());
+		quanlityParamDO.setUnit(param.getUnit());
+		paramDO.setParam(param.getParam());
+		paramDO.setId(param.getParamId());
+		waterService.insertWaterParam(paramDO);
+		waterService.insertWaterQualityParam(quanlityParamDO);
+		return model;	
 	}
 	public WaterInformationListItem getWaterInformation(Integer id) {
 		WaterInformationListItem model = new WaterInformationListItem();
@@ -168,5 +216,57 @@ public class WaterProcess {
 		}*/
 	
 		return model;	
+	}
+	public WaterParamModel  getWaterParam() {
+		WaterParamModel model = new WaterParamModel();
+		List<WaterParamDO> tags = waterService.getWaterParam();
+		List<WaterParamSimpleItem> items = new ArrayList<>();
+		for (WaterParamDO tag : tags) {
+			WaterParamSimpleItem item = new WaterParamSimpleItem();
+			item.setId(tag.getId());
+			item.setParam(tag.getParam());
+			items.add(item);	
+		}
+		model.setList(items);
+		return model;
+	}
+	public WaterQualityParamModel getWaterParamDetail(Integer id) {
+		WaterQualityParamModel model= new WaterQualityParamModel();
+		WaterQuanlityParamDO paramDO = waterService.getWaterParamDetail(id);
+		model.setAlarmMax(paramDO.getAlarmMax());
+		model.setAlarmMin(paramDO.getAlarmMin());
+		model.setChinese(paramDO.getChinese());
+		model.setCurvePoints(paramDO.getCurvePoints());
+		model.setEnglish(paramDO.getEnglish());
+		model.setId(paramDO.getId());
+		model.setParamId(paramDO.getParamId());
+		model.setScopeMax(paramDO.getScopeMax());
+		model.setScopeMin(paramDO.getScopeMin());
+		model.setUnit(paramDO.getUnit());
+		return model;
+	}
+	public SimpleFlagModel deteleWaterParam(Integer id) {
+		SimpleFlagModel model = new SimpleFlagModel();
+		waterService.deleteWaterParam(id);
+		return model;	
+	}
+	public SimpleFlagModel addWaters(WaterInformationParam param) {
+		SimpleFlagModel model =new SimpleFlagModel();
+		WaterInformationDO inforDO = new WaterInformationDO();
+		waterService.addWaterInformation(inforDO);
+		return model;
+	}
+	public SimpleFlagModel updateWaters(WaterInformationParam param) {
+		WaterInformationDO inforDO = new WaterInformationDO();
+		SimpleFlagModel model =new SimpleFlagModel();
+		return model;
+		
+	}
+	public SimpleFlagModel deleteWaters(Integer id) {
+		WaterInformationDO inforDO = new WaterInformationDO();
+		SimpleFlagModel model =new SimpleFlagModel();
+		waterService.deleteWaterInformation(id);
+		return model;
+		
 	}
 }
