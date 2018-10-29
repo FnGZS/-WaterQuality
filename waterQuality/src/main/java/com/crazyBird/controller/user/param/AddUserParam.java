@@ -1,20 +1,12 @@
-package com.crazyBird.controller.user.model;
+package com.crazyBird.controller.user.param;
 
-import com.crazyBird.controller.base.AbstractFlagModel;
+public class AddUserParam {
 
-public class UserWaterLoginModel extends AbstractFlagModel{
-
-	
-	private Long userID;
 	private Long jurisdiction;
 	private String userName;
+	private String password;
+
 	
-	public Long getUserID() {
-		return userID;
-	}
-	public void setUserID(Long userID) {
-		this.userID = userID;
-	}
 	public Long getJurisdiction() {
 		return jurisdiction;
 	}
@@ -27,5 +19,13 @@ public class UserWaterLoginModel extends AbstractFlagModel{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
+	
+
 }

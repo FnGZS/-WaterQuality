@@ -14,8 +14,26 @@
 		select
 		<include refid="Base_Column_List" />
 		from user
-		where id = #{userId,jdbcType=BIGINT}
+		where user_name = #{userName,jdbcType=VARCHAR}
 		and 
 		password = #{password,jdbcType=VARCHAR}
 	</select>
+	<insert id="insert" parameterType="com.crazyBird.dao.user.dataobject.AddUserDO" >
+    insert into user
+    (
+    	user_name, 
+    	password, 
+    	jurisdiction, 
+    	gmt_created, 
+    	gmt_modified
+    )
+    values 
+    (
+    	#{userName,jdbcType=VARCHAR}, 
+    	#{password,jdbcType=VARCHAR}, 
+    	#{jurisdiction,jdbcType=BIGINT}, 
+    	NOW(),
+		NOW()
+	)
+  </insert>
 </mapper>

@@ -2,13 +2,14 @@ package com.crazyBird.dao.user.dataobject;
 
 public class UserWaterDO {
 
-	private Long userId;
+	private String userName;
 	private String password;
-	public Long getUserId() {
-		return userId;
+	
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;

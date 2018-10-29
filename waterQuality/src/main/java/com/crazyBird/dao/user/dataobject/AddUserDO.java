@@ -1,20 +1,10 @@
-package com.crazyBird.controller.user.model;
+package com.crazyBird.dao.user.dataobject;
 
-import com.crazyBird.controller.base.AbstractFlagModel;
+public class AddUserDO {
 
-public class UserWaterLoginModel extends AbstractFlagModel{
-
-	
-	private Long userID;
 	private Long jurisdiction;
 	private String userName;
-	
-	public Long getUserID() {
-		return userID;
-	}
-	public void setUserID(Long userID) {
-		this.userID = userID;
-	}
+	private String password;
 	public Long getJurisdiction() {
 		return jurisdiction;
 	}
@@ -27,5 +17,12 @@ public class UserWaterLoginModel extends AbstractFlagModel{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	
 }
