@@ -70,7 +70,7 @@ public class WaterProcess {
 		WaterQualityInforDO inforDO = new WaterQualityInforDO();
 		inforDO.setWatersId(param.getWatersId());
 		inforDO.setParamId(param.getPasramId());
-		List<WaterInformationDTO> tags = waterService.getWatersParamInformation(inforDO);
+		List<WaterInformationDTO> tags = waterService.getWatersAllParamInformation(inforDO);
 		for (WaterInformationDTO tag : tags) {
 			WaterParamItem item = new WaterParamItem();
 			item.setAdminId(tag.getAdminId());
@@ -253,13 +253,26 @@ public class WaterProcess {
 	public SimpleFlagModel addWaters(WaterInformationParam param) {
 		SimpleFlagModel model =new SimpleFlagModel();
 		WaterInformationDO inforDO = new WaterInformationDO();
+		inforDO.setArea(param.getArea());
+		inforDO.setId(param.getId());
+		inforDO.setLocation(param.getLocation());
+		inforDO.setUse(param.getUse());
+		inforDO.setAdminId(param.getAdminId());
+		
 		waterService.addWaterInformation(inforDO);
 		return model;
 	}
 	public SimpleFlagModel updateWaters(WaterInformationParam param) {
 		WaterInformationDO inforDO = new WaterInformationDO();
 		SimpleFlagModel model =new SimpleFlagModel();
+		inforDO.setArea(param.getArea());
+		inforDO.setId(param.getId());
+		inforDO.setLocation(param.getLocation());
+		inforDO.setUse(param.getUse());
+		inforDO.setAdminId(param.getAdminId());
+		waterService.updateWaterInformation(inforDO);
 		return model;
+		
 		
 	}
 	public SimpleFlagModel deleteWaters(Integer id) {

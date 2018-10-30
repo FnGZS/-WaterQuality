@@ -5,4 +5,42 @@
 	<select id="getWatersCount" resultType="java.lang.Integer">
 	select count(1) from water_information 
 	</select>
+	<insert id = "addWaterInformation" parameterType="com.crazyBird.dao.water.dataobject.WaterInformationDO">
+	insert into water_information 
+	(id,
+	`use`,
+	area,
+	location,
+	admin_id
+	)values
+	(
+	#{id,jdbcType=INTEGER},
+	#{use,jdbcType=VARCHAR},
+	#{area,jdbcType=INTEGER},
+	#{location,jdbcType=VARCHAR},
+	#{adminId,jdbcType=INTEGER}
+	) 
+	</insert>
+	<update id = "updateWaterInformation" parameterType="com.crazyBird.dao.water.dataobject.WaterInformationDO"> 
+	update  water_information 
+	<set>
+	<if test="use != null">
+	`use`=#{use,jdbcType=VARCHAR},
+	</if>
+	<if test="area != null">
+	area=#{area,jdbcType=INTEGER},
+	</if>
+	<if test="location != null">
+	location=#{location,jdbcType=VARCHAR},
+	</if>
+	<if test="adminId != null">
+	admin_id=#{adminId,jdbcType=INTEGER}
+	</if>
+	</set>
+	where  id=#{id,jdbcType=INTEGER}
+	</update>
+	<delete id ="deleteWaterInformation" parameterType="java.lang.Integer">
+	delete from water_information  where id = #{id,jdbcType=INTEGER}
+	</delete>
+
 </mapper>

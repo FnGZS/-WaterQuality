@@ -16,5 +16,7 @@ public interface WaterQualityInformationDao {
 	
 	//获得某个参数近10个值
 	List<WaterInformationDTO> getWatersParamInformation(WaterQualityInforDO inforDO);
+	
+	List<WaterInformationDTO> getWatersParamAllInformation(WaterQualityInforDO inforDO);
 
 }

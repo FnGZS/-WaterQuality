@@ -41,10 +41,10 @@ public class WaterController {
 		return waterProcess.getWaterInformation();
 		//return waterProcess.getWaterInformation();
 	}
-	//获取某个水域每个参数近十条的信息
-	@RequestMapping(value = "/getInforByWaters/{id}",method = RequestMethod.GET)
+	//获取某个水域每个参数近五条的信息
+	@RequestMapping(value = "/getInforByWaters/{id}",method = RequestMethod.POST)
 	@ResponseBody
-	public WaterParamListModel getWaterInformationByWaters(@PathVariable Integer id) {
+	public WaterParamListModel getWaterInformationByWaters(Integer id) {
 		return waterProcess.getWaterInformationByWaters(id);
 	}
 	//获取参数全部信息
@@ -84,9 +84,9 @@ public class WaterController {
 		return waterProcess.deteleWaterParam(id);
 	}
 	//添加某个水域
-	@RequestMapping(value = "/addWater/",method = RequestMethod.POST)
+	@RequestMapping(value = "/addWater",method = RequestMethod.POST)
 	@ResponseBody
-	public SimpleFlagModel addWaters(WaterInformationParam param) {
+	public SimpleFlagModel addWaters(@RequestBody WaterInformationParam param) {
 		
 		return waterProcess.addWaters(param);
 		
@@ -94,7 +94,7 @@ public class WaterController {
 	//修改某个水域
 	@RequestMapping(value = "/updateWater",method = RequestMethod.PUT)
 	@ResponseBody
-	public SimpleFlagModel updateWaters(WaterInformationParam param) {
+	public SimpleFlagModel updateWaters(@RequestBody WaterInformationParam param) {
 		return waterProcess.updateWaters(param);
 		
 	}

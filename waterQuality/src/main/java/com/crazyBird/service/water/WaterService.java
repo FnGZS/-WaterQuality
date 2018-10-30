@@ -15,6 +15,7 @@ public interface WaterService {
 	Integer getWatersCount();
 	Integer getWatersParamCount();
 	List<WaterInformationDTO> getWatersParamInformation(WaterQualityInforDO inforDO);
+	List<WaterInformationDTO> getWatersAllParamInformation(WaterQualityInforDO inforDO);
 	void insertWaterQualityParam(WaterQuanlityParamDO paramDO);
 	void insertWaterParam(WaterParamDO paramDO);
 	void updateWaterQualityParam(WaterQuanlityParamDO paramDO);
