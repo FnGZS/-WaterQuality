@@ -38,22 +38,33 @@
 			jdbcType="TIMESTAMP" />	
 	</resultMap>
 	<select id = "getWaterInformation" parameterType= "com.crazyBird.dao.water.dataobject.WaterQualityInforDO" resultMap = "WaterInformationDTOMap">
-	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.`name`
+	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.user_name
 	FROM water_quality_param as wqp 
 	LEFT JOIN water_param as wp on wp.id=wqp.param_id  
 	LEFT JOIN water_quality_infor as wqi on wqi.param_id=wp.id     
 	LEFT JOIN water_information as wi on wi.id = wqi.waters_id
-	LEFT JOIN admin as ad on ad.id = wi.admin_id
+	LEFT JOIN user as ad on ad.id = wi.admin_id
 	where wqi.waters_id = #{watersId,jdbcType=INTEGER} and wqi.param_id=#{paramId,jdbcType=INTEGER}  ORDER BY wqi.gmt_create desc limit 1
 	</select>
+	
 	<select id = "getWatersParamInformation" parameterType= "com.crazyBird.dao.water.dataobject.WaterQualityInforDO" resultMap = "WaterInformationDTOMap">
-	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.`name`
+	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.user_name
 	FROM water_quality_param as wqp 
 	LEFT JOIN water_param as wp on wp.id=wqp.param_id  
 	LEFT JOIN water_quality_infor as wqi on wqi.param_id=wp.id     
 	LEFT JOIN water_information as wi on wi.id = wqi.waters_id
-	LEFT JOIN admin as ad on ad.id = wi.admin_id
-	where wqi.waters_id = #{watersId,jdbcType=INTEGER} and wqi.param_id=#{paramId,jdbcType=INTEGER}  ORDER BY wqi.gmt_create desc limit 10
+	LEFT JOIN user as ad on ad.id = wi.admin_id
+	where wqi.waters_id = #{watersId,jdbcType=INTEGER} and wqi.param_id=#{paramId,jdbcType=INTEGER}  ORDER BY wqi.gmt_create desc limit 5
+	</select>
+	
+	<select id = "getWatersParamAllInformation" parameterType= "com.crazyBird.dao.water.dataobject.WaterQualityInforDO" resultMap = "WaterInformationDTOMap">
+	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.user_name
+	FROM water_quality_param as wqp 
+	LEFT JOIN water_param as wp on wp.id=wqp.param_id  
+	LEFT JOIN water_quality_infor as wqi on wqi.param_id=wp.id     
+	LEFT JOIN water_information as wi on wi.id = wqi.waters_id
+	LEFT JOIN user as ad on ad.id = wi.admin_id
+	where wqi.waters_id = #{watersId,jdbcType=INTEGER} and wqi.param_id=#{paramId,jdbcType=INTEGER}  ORDER BY wqi.gmt_create asc 
 	</select>
 	<insert id = "insertWaterInformation" parameterType = "ArrayList"> 
 	insert into water_quality_infor 
