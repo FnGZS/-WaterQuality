@@ -4,6 +4,14 @@ import java.util.Date;
 
 public class WaterInformationDTO {
 	private Integer id;
+	private Long inforId;
+	
+	public Long getInforId() {
+		return inforId;
+	}
+	public void setInforId(Long inforId) {
+		this.inforId = inforId;
+	}
 	public Integer getId() {
 		return id;
 	}

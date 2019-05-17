@@ -3,8 +3,6 @@ package com.crazyBird.controller.user.model;
 import com.crazyBird.controller.base.AbstractFlagModel;
 
 public class UserWaterLoginModel extends AbstractFlagModel{
-
-	
 	private Long userID;
 	private Long jurisdiction;
 	private String userName;

@@ -3,6 +3,14 @@ package com.crazyBird.controller.water.model;
 public class WaterParamItem {
 	private Integer id;
 	private Integer paramId;
+	private Long InforId;
+	
+	public Long getInforId() {
+		return InforId;
+	}
+	public void setInforId(Long inforId) {
+		InforId = inforId;
+	}
 	public Integer getParamId() {
 		return paramId;
 	}

@@ -82,6 +82,7 @@ public class WaterProcess {
 			item.setEnglish(tag.getEnglish());
 			item.setGmtCreate(DateUtil.formatDate(tag.getGmtCreate(), DateUtil.DATE_FORMAT_YMDHMS));
 			item.setId(tag.getId());
+			item.setInforId(tag.getInforId());
 			item.setLocation(tag.getLocation());
 			item.setName(tag.getName());
 			item.setParamId(param.getPasramId());
@@ -279,6 +280,13 @@ public class WaterProcess {
 		WaterInformationDO inforDO = new WaterInformationDO();
 		SimpleFlagModel model =new SimpleFlagModel();
 		waterService.deleteWaterInformation(id);
+		return model;
+		
+	}
+	public SimpleFlagModel deleteWatersInformation(Long id) {
+		SimpleFlagModel model = new SimpleFlagModel();
+		waterService.deleteWatersParamAllInformation(id);
+		
 		return model;
 		
 	}

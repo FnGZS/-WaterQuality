@@ -32,6 +32,8 @@
 			jdbcType="VARCHAR" />	
 		<result column="name" property="name"
 			jdbcType="VARCHAR" />	
+		<result column="infor_id" property="inforId"
+			jdbcType="BIGINT" />	
 		<result column="unit" property="unit"
 			jdbcType="VARCHAR" />	
 		<result column="gmt_create" property="gmtCreate"
@@ -58,7 +60,7 @@
 	</select>
 	
 	<select id = "getWatersParamAllInformation" parameterType= "com.crazyBird.dao.water.dataobject.WaterQualityInforDO" resultMap = "WaterInformationDTOMap">
-	SELECT wp.param,wqi.param_value,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.user_name
+	SELECT wp.param,wqi.param_value,wqi.id as infor_id,wqp.alarm_max,wqp.alarm_min,wqp.chinese,wqp.curve_points,wqp.english,wqp.scope_max,wqp.scope_min,wqp.unit,wqi.gmt_create ,wi.id,wi.admin_id,wi.area,wi.location,wi.`use` ,ad.user_name
 	FROM water_quality_param as wqp 
 	LEFT JOIN water_param as wp on wp.id=wqp.param_id  
 	LEFT JOIN water_quality_infor as wqi on wqi.param_id=wp.id     
@@ -85,4 +87,7 @@
 	</foreach>
 	
 	</insert>
+	<delete id ="deleteWatersParamAllInformation" parameterType="java.lang.Long">
+	delete from water_quality_infor where id =#{id,jdbcType=BIGINT}
+	</delete>
 </mapper>
