@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.crazyBird.controller.user.model.AddUserModel;
+import com.crazyBird.controller.user.model.UserListModel;
 import com.crazyBird.controller.user.model.UserWaterLoginModel;
 import com.crazyBird.controller.user.param.AddUserParam;
 import com.crazyBird.controller.user.param.UserWaterParam;
+import com.crazyBird.controller.user.param.userListPageParam;
 import com.crazyBird.dao.user.dataobject.AddUserDO;
 import com.crazyBird.dao.user.dataobject.UserWaterDO;
 import com.crazyBird.dao.user.dataobject.UserWaterLoginDO;
 import com.crazyBird.model.enums.HttpCodeEnum;
 import com.crazyBird.service.user.UserWaterService;
+import com.crazyBird.utils.PageUtils;
 import com.crazyBird.service.base.ResponseDO;
 
 @Component
@@ -52,6 +55,12 @@ public class UserProcess {
 		}
 		model.setResult(result.getDataResult());
 		model.setMessage("添加成功");
+		return model;
+	}
+
+	public UserListModel getUserList(userListPageParam param) {
+		UserListModel model = new UserListModel();
+		PageUtils.resetPageParam(param);
 		return model;
 	}
 
