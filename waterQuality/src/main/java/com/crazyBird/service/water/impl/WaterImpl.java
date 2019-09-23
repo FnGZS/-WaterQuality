@@ -110,5 +110,10 @@ public class WaterImpl implements WaterService{
 		// TODO Auto-generated method stub
 		return waterQualityInformationDao.getWatersParamAllInformation(inforDO);
 	}
+	@Override
+	public void deleteWatersParamAllInformation(Long id) {
+		waterQualityInformationDao.deleteWatersParamAllInformation(id);
+		
+	}
 	
 }

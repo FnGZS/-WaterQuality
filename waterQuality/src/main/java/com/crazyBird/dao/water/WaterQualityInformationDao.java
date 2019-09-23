@@ -18,5 +18,7 @@ public interface WaterQualityInformationDao {
 	List<WaterInformationDTO> getWatersParamInformation(WaterQualityInforDO inforDO);
 	
 	List<WaterInformationDTO> getWatersParamAllInformation(WaterQualityInforDO inforDO);
+	
+	void deleteWatersParamAllInformation(Long id);
 
 }

@@ -42,9 +42,9 @@ public class WaterController {
 		//return waterProcess.getWaterInformation();
 	}
 	//获取某个水域每个参数近五条的信息
-	@RequestMapping(value = "/getInforByWaters/{id}",method = RequestMethod.POST)
+	@RequestMapping(value = "/getInforByWaters/{id}",method = RequestMethod.GET)
 	@ResponseBody
-	public WaterParamListModel getWaterInformationByWaters(Integer id) {
+	public WaterParamListModel getWaterInformationByWaters(@PathVariable Integer id) {
 		return waterProcess.getWaterInformationByWaters(id);
 	}
 	//获取参数全部信息
@@ -104,6 +104,12 @@ public class WaterController {
 	public SimpleFlagModel deleteWaters(@PathVariable Integer id) {
 		return waterProcess.deleteWaters(id);
 		
+	}
+	//删除某条记录
+	@RequestMapping(value = "/deleteInformation/{id}",method = RequestMethod.DELETE)
+	@ResponseBody
+	public SimpleFlagModel deleteWatersInformation(@PathVariable Long id) {
+		return waterProcess.deleteWatersInformation(id);
 	}
 	
 }

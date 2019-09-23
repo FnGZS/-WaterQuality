@@ -24,7 +24,7 @@
 			jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id,alarmMax,alarmMin,chinese,curvePoints,english,scopeMax,scopeMin,unit,param_id
+id,alarm_max,alarm_min,chinese,curve_points,english,scope_max,scope_min,unit,param_id
 	</sql>
 	<insert id= "insertWaterQualityParam" parameterType="com.crazyBird.dao.water.dataobject.WaterQuanlityParamDO">
 	insert into water_quality_param (
